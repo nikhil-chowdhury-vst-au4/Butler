@@ -45,8 +45,10 @@ jobs:
         key: ${{secrets.SSH_KEY}}
         script: |
             sudo su
-            cd Butler/
+            cd Butler
+            pm2 delete all
             git pull
             npm run build
-            npm run start
+            cd dist 
+            pm2 start app.js --name Notifications -i 3
     
