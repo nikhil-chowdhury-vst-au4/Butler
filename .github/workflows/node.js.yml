@@ -44,8 +44,9 @@ jobs:
     # ssh key
         key: ${{secrets.SSH_KEY}}
         script: |
+            sudo su
             cd Butler/
             git pull
-            npn run build
+            npm run build
             npm run start
     
