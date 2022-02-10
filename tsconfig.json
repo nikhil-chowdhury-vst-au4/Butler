@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "outDir": "dist",
+      "target": "es6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "typeRoots": ["node_modules/@types"],
+      "baseUrl": ".",
+      "esModuleInterop": true,
+      "paths": {
+  
+      }
+    },
+     "include": ["src/**/**.ts", "test/**/**.ts"],
+    "exclude": ["node_modules"]
+  }
