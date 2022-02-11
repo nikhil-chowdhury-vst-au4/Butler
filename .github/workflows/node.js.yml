@@ -20,16 +20,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-        run:|
-            ls ${{ github.workspace }}
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
     - run: npm ci
     - run: npm run build --if-present
 
@@ -37,16 +35,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      uses: appleboy/ssh-action@v0.1.4
     - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.4
       with:
      # ssh host
         host: ${{secrets.SSH_HOST}}
-    # ssh username
+     # ssh username
         username: ${{secrets.SSH_USERNAME}}
-    # ssh key
+     # ssh key
         key: ${{secrets.SSH_KEY}}
         script: |
             sudo su
